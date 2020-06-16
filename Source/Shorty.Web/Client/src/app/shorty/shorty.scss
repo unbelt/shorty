@@ -1,0 +1,22 @@
+.shorty {
+    &__uri-container {
+        margin: 20% 10%;
+        text-align: center;
+    }
+
+    &__uri-prefix-form-input-field {
+        width: 25%;
+        margin-right: 10px;
+        float: left;
+    }
+
+    &__uri-form-input-field {
+        width: 70%;
+        float: right;
+    }
+
+    &__uri-form-result-field {
+        margin-top: 30px;
+        width: 100%;
+    }
+}

@@ -1,0 +1,4 @@
+<ng-container *ngIf="appModel.appState$ | async as appState">
+    <app-loader *ngIf="appState.loaderState.isLoading"></app-loader>
+    <router-outlet></router-outlet>
+</ng-container>

@@ -1,0 +1,12 @@
+{
+    "extends": "./tsconfig.json",
+    "compilerOptions": {
+        "outDir": "./out-tsc/spec",
+        "types": ["jest", "node"]
+    },
+    "files": [
+        "./Source/Shorty.Web/Client/config/spec.bundle.js",
+        "./Source/Shorty.Web/Client/src/polyfills.ts"
+    ],
+    "include": ["./Source/Shorty.Web/Client/src/**/*.spec.ts", "./Source/Shorty.Web/Client/src/**/*.d.ts"]
+}
