@@ -32,7 +32,7 @@ module.exports = {
     plugins: [
         new CleanWebpackPlugin({
             root: app.dir.wwwRoot,
-            cleanOnceBeforeBuildPatterns: ['**/*'],
+            cleanOnceBeforeBuildPatterns: ['**/*', '!*.ico'],
             cleanAfterEveryBuildPatterns: [`${app.dir.src}/**/*.js`, `${app.dir.src}/**/**.map`],
         }),
         new HtmlWebpackPlugin({
@@ -43,6 +43,8 @@ module.exports = {
         new FilterWarningsPlugin({
             exclude: /System.import/,
         }),
-        new CopyWebpackPlugin([{ from: `${app.dir.src}/assets/**/*.*`, to: app.dir.wwwRoot, flatten: true }]),
+        new CopyWebpackPlugin({
+            patterns: [{ from: `${app.dir.src}/assets/**/*`, to: app.dir.wwwRoot, flatten: true }],
+        }),
     ],
 };

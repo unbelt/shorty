@@ -35,39 +35,37 @@ namespace Shorty.Web
             }
             else
             {
-                app.UseHttpsRedirection();
-                app.UseExceptionHandler("/Error");
-                app.UseHsts();
+                app.UseHttpsRedirection()
+                    .UseExceptionHandler("/Error")
+                    .UseHsts();
             }
 
-            app.UseConfiguredSwagger(_apiConfig);
-            app.UseConfiguredSpa(_clientConfig);
-            app.UseConfiguredRedirect(_apiConfig);
-            app.UseMiddleware<ExceptionMiddleware>();
-
-            app.UseMvc();
-            app.UseDefaultFiles();
-            app.UseStaticFiles();
+            app.UseConfiguredSwagger(_apiConfig)
+                .UseConfiguredSpa(_clientConfig)
+                .UseConfiguredRedirect(_apiConfig)
+                .UseMiddleware<ExceptionMiddleware>()
+                .UseMvc()
+                .UseDefaultFiles()
+                .UseStaticFiles();
         }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public IServiceProvider ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc(option =>
+            services
+                .AddApiVersioning(options => options.ReportApiVersions = true)
+                .AddSwaggerDocument(_apiConfig)
+                .AddMemoryCache()
+                .AddSingleton<IShortyProvider, ShortyProvider>()
+                .AddSingleton<IUriStorageService, UriStorageService>()
+                .AddMvc(option =>
             {
                 option.EnableEndpointRouting = false;
                 option.UseGeneralRoutePrefix(Constants.GENERAL_ROUTE_PREFIX);
             }).SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
 
-            services.AddApiVersioning(options => options.ReportApiVersions = true);
-
-            services.AddSwaggerDocument(_apiConfig).AddMemoryCache();
-
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration => configuration.RootPath = _clientConfig.DistPath);
-
-            services.AddSingleton<IShortyProvider, ShortyProvider>();
-            services.AddSingleton<IUriStorageService, UriStorageService>();
 
             (var container, var serviceProvider) = services.InitializeAutofac(GetType().Assembly);
 
