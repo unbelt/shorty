@@ -8,7 +8,6 @@ require('zone.js/dist/sync-test');
 require('zone.js/dist/jasmine-patch');
 require('zone.js/dist/async-test');
 require('zone.js/dist/fake-async-test');
-require('rxjs/Rx');
 
 const testing = require('@angular/core/testing');
 const browser = require('@angular/platform-browser-dynamic/testing');

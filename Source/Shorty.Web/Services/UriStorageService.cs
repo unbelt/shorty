@@ -1,52 +1,64 @@
-using System.Collections.Generic;
+using System.Threading.Tasks;
 using Shorty.Web.Config;
 using Shorty.Web.Extensions;
 using Shorty.Web.Models;
 using Microsoft.Extensions.Configuration;
-using MongoDB.Driver;
+using Dapper;
+using Npgsql;
 
 namespace Shorty.Web.Services
 {
     public class UriStorageService : IUriStorageService
     {
-        private readonly IMongoCollection<Uri> _uris;
+        private readonly IDatabaseConfiguration _dbConfig;
 
         public UriStorageService(IConfiguration configuration)
         {
-            var dbConfig = configuration.FromAppSettgins<DatabaseConfiguration>();
-
-            var settings = new MongoClientSettings
-            {
-                RetryWrites = false,
-                Server = new MongoServerAddress(dbConfig.Endpoint, dbConfig.Port),
-                Credential = MongoCredential.CreateCredential(dbConfig.Name, dbConfig.Name, dbConfig.Password)
-            };
-            var client = new MongoClient(settings);
-            var database = client.GetDatabase(dbConfig.Name);
-
-            _uris = database.GetCollection<Uri>(dbConfig.UriCollectionName);
+            _dbConfig = configuration.FromAppSettgins<DatabaseConfiguration>();
         }
 
-        public List<Uri> Get() =>
-             _uris.Find(uri => true).ToList();
-
-        public Uri Get(string id) =>
-             _uris.Find(uri => uri.Id == id).FirstOrDefault();
-
-        public Uri Create(Uri uri)
+        public async Task<Uri> Get(string id)
         {
-            _uris.InsertOne(uri);
+            using var connection = new NpgsqlConnection(_dbConfig.PostgreSqlConnectionString);
+
+            var uri = await connection.QueryFirstOrDefaultAsync<Uri>("SELECT id, value FROM url WHERE id = @id", new { id });
 
             return uri;
         }
 
-        public void Update(Uri uri) =>
-             _uris.ReplaceOne(u => u.Id == uri.Id, uri);
+        public async Task<bool> Create(Uri uri)
+        {
+            using var connection = new NpgsqlConnection(_dbConfig.PostgreSqlConnectionString);
 
-        public void Remove(Uri uri) =>
-             _uris.DeleteOne(u => u.Id == uri.Id);
+            var affected = await connection.ExecuteAsync("INSERT INTO url (id, value) VALUES (@Id, @Value)", new
+            {
+                uri.Id,
+                uri.Value,
+            });
 
-        public void Remove(string id) =>
-             _uris.DeleteOne(uri => uri.Id == id);
+            return affected != 0;
+        }
+
+        public async Task<bool> Update(Uri uri)
+        {
+            using var connection = new NpgsqlConnection(_dbConfig.PostgreSqlConnectionString);
+
+            var affected = await connection.ExecuteAsync("UPDATE url SET value = @Value WHERE id = @Id", new
+            {
+                uri.Value,
+                uri.Id,
+            });
+
+            return affected != 0;
+        }
+
+        public async Task<bool> Delete(string id)
+        {
+            using var connection = new NpgsqlConnection(_dbConfig.PostgreSqlConnectionString);
+
+            var affected = await connection.ExecuteAsync("DELETE FROM url WHERE id = @id", new { id });
+
+            return affected != 0;
+        }
     }
 }

@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using System.Threading.Tasks;
 using System.Linq;
 using System.Net.Mime;
 using Shorty.Web.Providers;
@@ -26,12 +27,25 @@ namespace Shorty.Web.Controllers
         [HttpGet("shorten")]
         [Consumes(MediaTypeNames.Application.Json)]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public IActionResult Shorten([Required] string uri, string uriPrefix = "")
+        public async Task<IActionResult> Shorten([Required] string uri, string uriPrefix = "")
         {
-            var uriId = _shortyProvider.ShortenUri(uri, uriPrefix);
-            var shortUri = $"{HttpContext.Request.Scheme}://{HttpContext.Request.Host.Value}/{uriId}";
+            try
+            {
+                var uriId = await _shortyProvider.ShortenUri(uri, uriPrefix);
 
-            return Ok(shortUri);
+                if (string.IsNullOrWhiteSpace(uriId))
+                {
+                    return BadRequest("URI creation failed.");
+                }
+
+                var shortUri = $"{HttpContext.Request.Scheme}://{HttpContext.Request.Host.Value}/{uriId}";
+
+                return Ok(shortUri);
+            }
+            catch (System.Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         /// <summary>
@@ -44,27 +58,33 @@ namespace Shorty.Web.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status302Found)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public IActionResult Resolve(string id, bool redirect = true)
+        public async Task<IActionResult> Resolve(string id, bool redirect = true)
         {
             // 100% query if not param
-            var query =
-                string.IsNullOrWhiteSpace(id) ?
-                    QueryHelpers.ParseQuery(HttpContext.Request.QueryString.Value).First().Key.Split('/').LastOrDefault() :
-                    id.Split('/').LastOrDefault();
+            var query = string.IsNullOrWhiteSpace(id) ?
+                QueryHelpers.ParseQuery(HttpContext.Request.QueryString.Value).First().Key.Split('/').LastOrDefault() :
+                id.Split('/').LastOrDefault();
 
-            var uri = _shortyProvider.ResolveUri(query);
-
-            if (!redirect && string.IsNullOrWhiteSpace(uri))
+            try
             {
-                return NotFound();
-            }
+                var uri = await _shortyProvider.ResolveUri(query);
 
-            if (redirect)
+                if (!redirect && string.IsNullOrWhiteSpace(uri))
+                {
+                    return NotFound();
+                }
+
+                if (redirect)
+                {
+                    return Redirect(string.IsNullOrWhiteSpace(uri) ? "/not-found" : uri);
+                }
+
+                return Ok(uri);
+            }
+            catch (System.Exception ex)
             {
-                return Redirect(string.IsNullOrWhiteSpace(uri) ? "/not-found" : uri);
+                return BadRequest(ex.Message);
             }
-
-            return Ok(uri);
         }
     }
 }

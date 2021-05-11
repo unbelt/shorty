@@ -1,6 +1,6 @@
 const path = require('path');
 const webpack = require('webpack');
-const TSLintPlugin = require('tslint-webpack-plugin');
+const ESLintPlugin = require('eslint-webpack-plugin');
 const CircularDependencyPlugin = require('circular-dependency-plugin');
 
 const app = require('./app.config');
@@ -31,13 +31,7 @@ module.exports = {
         rules: [
             {
                 test: /\.ts$/,
-                use: [
-                    'awesome-typescript-loader',
-                    'angular-router-loader',
-                    'angular2-template-loader',
-                    'source-map-loader',
-                    'tslint-loader',
-                ],
+                use: ['awesome-typescript-loader', 'angular2-template-loader', 'source-map-loader'],
             },
             {
                 test: /\.(png|jpg|gif|woff|woff2|ttf|svg|eot)$/,
@@ -64,20 +58,18 @@ module.exports = {
         ],
     },
     plugins: [
-        function () {
-            this.plugin('watch-run', function (watching, callback) {
-                console.log('\x1b[33m%s\x1b[0m', `Begin compile at ${new Date().toTimeString()}`);
-                callback();
-            });
-        },
         new webpack.optimize.ModuleConcatenationPlugin(),
 
-        new TSLintPlugin({
-            config: `${app.dir.root}/tslint.json`,
-            files: [`${app.dir.src}/**/*.ts`],
-            warningsAsError: true,
+        // {
+        //     config: `${app.dir.root}/.eslintrc.json`,
+        //     files: [`${app.dir.src}/**/*.ts`],
+        //     warningsAsError: true,
+        //     fix: true,
+        //     typeCheck: true,
+        // }
+        new ESLintPlugin({
+            extensions: ['ts'],
             fix: true,
-            typeCheck: true,
         }),
         new CircularDependencyPlugin({
             exclude: /a\.js|node_modules/,

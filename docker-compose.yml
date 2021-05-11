@@ -1,0 +1,40 @@
+version: '3'
+
+services:
+    pg_database:
+        image: postgres:latest
+        environment:
+            - POSTGRES_USER=unbelt
+            - POSTGRES_PASSWORD=admin
+            - POSTGRES_DB=shorty
+        ports:
+            - '5432:5432'
+        restart: unless-stopped
+        volumes:
+            - pgdata:/var/lib/postgresql/data
+
+    pg_admin:
+        image: dpage/pgadmin4
+        environment:
+            - PGADMIN_DEFAULT_EMAIL=unbelt@outlook.com
+            - PGADMIN_DEFAULT_PASSWORD=admin
+        ports:
+            - '5050:80'
+        restart: unless-stopped
+        volumes:
+            - pgadmin:/root/.pgadmin
+
+    web:
+        image: unbelt/shorty
+        ports:
+            - '80:80'
+        restart: unless-stopped
+        build:
+            context: .
+            dockerfile: Dockerfile
+        depends_on:
+            - pg_database
+
+volumes:
+    pgdata:
+    pgadmin:

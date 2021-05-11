@@ -8,7 +8,7 @@ namespace Shorty.Web.Extensions
     [ExcludeFromCodeCoverage]
     internal static class ApplicationBuilderExtensions
     {
-        public static IApplicationBuilder UseConfiguredSwagger(this IApplicationBuilder app, ApiConfiguration apiConfig)
+        public static IApplicationBuilder UseConfiguredSwagger(this IApplicationBuilder app, IApiConfiguration apiConfig)
         {
             app.UseSwagger(c => c.RouteTemplate = $"{apiConfig.Version}/{apiConfig.SourcePath}/{{documentName}}/{Constants.SWAGGER_FILE}")
                .UseSwaggerUI(c =>
@@ -24,7 +24,7 @@ namespace Shorty.Web.Extensions
             return app;
         }
 
-        public static IApplicationBuilder UseConfiguredSpa(this IApplicationBuilder app, ClientConfiguration clientConfig)
+        public static IApplicationBuilder UseConfiguredSpa(this IApplicationBuilder app, IClientConfiguration clientConfig)
         {
             app.MapWhen(c => clientConfig.Routes.Any(c.Request.Path.Value.Contains), app =>
             {
@@ -37,7 +37,7 @@ namespace Shorty.Web.Extensions
             return app;
         }
 
-        public static IApplicationBuilder UseConfiguredRedirect(this IApplicationBuilder app, ApiConfiguration apiConfig)
+        public static IApplicationBuilder UseConfiguredRedirect(this IApplicationBuilder app, IApiConfiguration apiConfig)
         {
             app.Use(async (context, next) =>
             {

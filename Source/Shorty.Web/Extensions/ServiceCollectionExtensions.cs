@@ -24,24 +24,23 @@ namespace Shorty.Web.Extensions
             return (Container: container, ServiceProvider: serviceProvider);
         }
 
-        public static IServiceCollection AddSwaggerDocument(this IServiceCollection services, ApiConfiguration apiConfig)
+        public static IServiceCollection AddSwaggerDocument(this IServiceCollection services, IApiConfiguration apiConfig)
         {
-            var swaggerGen = services
-                .AddSwaggerGen(c =>
-                {
-                    c.SwaggerDoc(
-                        apiConfig.Version,
-                        new OpenApiInfo
+            var swaggerGen = services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc(
+                    apiConfig.Version,
+                    new OpenApiInfo
+                    {
+                        Title = apiConfig.DocumentTitle,
+                        Version = apiConfig.DocumentVersion,
+                        Contact = new OpenApiContact
                         {
-                            Title = apiConfig.DocumentTitle,
-                            Version = apiConfig.DocumentVersion,
-                            Contact = new OpenApiContact
-                            {
-                                Name = Constants.PROJECT_NAME,
-                                Email = Constants.PROJECT_EMAIL
-                            }
-                        });
-                });
+                            Name = Constants.PROJECT_NAME,
+                            Email = Constants.PROJECT_EMAIL
+                        }
+                    });
+            });
 
             return swaggerGen;
         }

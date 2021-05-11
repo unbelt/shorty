@@ -1,20 +1,16 @@
-using System.Collections.Generic;
+using System.Threading.Tasks;
 using Shorty.Web.Models;
 
 namespace Shorty.Web.Services
 {
     public interface IUriStorageService
     {
-        List<Uri> Get();
+        Task<Uri> Get(string id);
 
-        Uri Get(string id);
+        Task<bool> Create(Uri uri);
 
-        Uri Create(Uri uri);
+        Task<bool> Update(Uri uri);
 
-        void Update(Uri uri);
-
-        void Remove(Uri uri);
-
-        void Remove(string id);
+        Task<bool> Delete(string id);
     }
 }

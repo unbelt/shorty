@@ -1,9 +1,11 @@
+using System.Threading.Tasks;
+
 namespace Shorty.Web.Providers
 {
     public interface IShortyProvider
     {
-        string ShortenUri(string longUri, string uriPrefix = "");
+        Task<string> ShortenUri(string longUri, string uriPrefix = "");
 
-        string ResolveUri(string id);
+        Task<string> ResolveUri(string id);
     }
 }

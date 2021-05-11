@@ -14,11 +14,11 @@ const routes: Routes = [
             },
             {
                 path: 'uri',
-                loadChildren: './shorty/shorty.module#ShortyModule',
+                loadChildren: () => import('./shorty/shorty.module').then((m) => m.ShortyModule),
             },
             {
                 path: '**',
-                loadChildren: './pages/pages.module#PagesModule',
+                loadChildren: () => import('./pages/pages.module').then((m) => m.PagesModule),
             },
         ],
     },

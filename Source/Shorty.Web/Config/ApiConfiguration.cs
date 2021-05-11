@@ -2,6 +2,21 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace Shorty.Web.Config
 {
+    public interface IApiConfiguration
+    {
+        string Version { get; set; }
+
+        string SourcePath { get; set; }
+
+        string DocumentName { get; set; }
+
+        string DocumentTitle { get; set; }
+
+        string DocumentVersion { get; set; }
+
+        int HttpCallTimeout { get; set; }
+    }
+
     [ExcludeFromCodeCoverage]
     internal sealed class ApiConfiguration : IApiConfiguration
     {
@@ -16,20 +31,5 @@ namespace Shorty.Web.Config
         public string DocumentVersion { get; set; }
 
         public int HttpCallTimeout { get; set; }
-    }
-
-    public interface IApiConfiguration
-    {
-        string Version { get; set; }
-
-        string SourcePath { get; set; }
-
-        string DocumentName { get; set; }
-
-        string DocumentTitle { get; set; }
-
-        string DocumentVersion { get; set; }
-
-        int HttpCallTimeout { get; set; }
     }
 }

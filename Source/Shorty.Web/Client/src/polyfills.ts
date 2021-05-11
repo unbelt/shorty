@@ -8,6 +8,10 @@ import 'core-js/es6/symbol';
 import 'core-js/es7/reflect';
 import 'zone.js/dist/zone';
 
+import * as process from 'process';
+
+window['process'] = process;
+
 if (!Element.prototype.matches) {
     Element.prototype.matches =
         (Element.prototype as any).msMatchesSelector || Element.prototype.webkitMatchesSelector;

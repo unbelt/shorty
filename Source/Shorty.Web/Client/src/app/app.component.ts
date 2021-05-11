@@ -1,8 +1,7 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 
 @Component({
-    // tslint:disable-next-line
-    selector: 'body',
+    selector: 'body', // eslint-disable-line @angular-eslint/component-selector
     template: '<router-outlet></router-outlet>',
     styleUrls: ['app.scss'],
     encapsulation: ViewEncapsulation.None,

@@ -1,7 +1,7 @@
 ﻿const path = require('path');
-const FilterWarningsPlugin = require('webpack-filter-warnings-plugin');
-
 const app = require('./app.config');
+
+console.log('USING TEST');
 
 module.exports = {
     mode: 'development',
@@ -42,9 +42,4 @@ module.exports = {
         ],
         exprContextCritical: false,
     },
-    plugins: [
-        new FilterWarningsPlugin({
-            exclude: /System.import/,
-        }),
-    ],
 };

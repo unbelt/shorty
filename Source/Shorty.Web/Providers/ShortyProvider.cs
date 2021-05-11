@@ -1,4 +1,5 @@
 using System;
+using System.Threading.Tasks;
 using Shorty.Web.Services;
 using Microsoft.Extensions.Logging;
 
@@ -16,15 +17,13 @@ namespace Shorty.Web.Providers
             _logger = logger;
         }
 
-        public string ShortenUri(string longUri, string uriPrefix = "")
+        public async Task<string> ShortenUri(string longUri, string uriPrefix = "")
         {
             if (!Uri.IsWellFormedUriString(longUri, UriKind.Absolute))
             {
-                var invalidUriMessage = $"The URI is not valid: {longUri}";
+                _logger.LogWarning($"The URI is not valid: {longUri}");
 
-                _logger.LogWarning(invalidUriMessage);
-
-                throw new ApplicationException(invalidUriMessage);
+                return string.Empty;
             }
 
             var prefix = string.IsNullOrWhiteSpace(uriPrefix) ? string.Empty : $"{uriPrefix}-";
@@ -36,30 +35,22 @@ namespace Shorty.Web.Providers
                 Value = longUri
             };
 
-            try
-            {
-                var uri = _uriStorage.Create(newUri);
+            var created = await _uriStorage.Create(newUri);
 
-                return uri.Id;
-            }
-            catch (Exception ex)
-            {
-                var storageFailMessage = $"Storage failed for URI: {longUri}";
-
-                _logger.LogError(ex, storageFailMessage);
-
-                throw new ApplicationException(storageFailMessage);
-            }
+            return created ? newUri.Id : string.Empty;
         }
 
-        public string ResolveUri(string id)
+        public async Task<string> ResolveUri(string id)
         {
             if (string.IsNullOrWhiteSpace(id))
             {
-                throw new ApplicationException($"The URI ID is required! Provided ID: {id}");
+
+                _logger.LogWarning($"The URI ID is required! Provided ID: {id}");
+
+                return string.Empty;
             }
 
-            var uri = _uriStorage.Get(id);
+            var uri = await _uriStorage.Get(id);
 
             if (uri == null)
             {

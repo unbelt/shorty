@@ -15,8 +15,8 @@ namespace Shorty.Web
 {
     public class Startup
     {
-        private readonly ApiConfiguration _apiConfig;
-        private readonly ClientConfiguration _clientConfig;
+        private readonly IApiConfiguration _apiConfig;
+        private readonly IClientConfiguration _clientConfig;
         private readonly IHostEnvironment _hostingEnvironment;
 
         public Startup(IHostEnvironment hostingEnvironment, IConfiguration configuration)
