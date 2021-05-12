@@ -2,7 +2,7 @@ version: '3'
 
 services:
     pg_database:
-        image: postgres:latest
+        image: postgres:13-alpine
         environment:
             - POSTGRES_USER=unbelt
             - POSTGRES_PASSWORD=admin
@@ -11,6 +11,7 @@ services:
             - '5432:5432'
         restart: unless-stopped
         volumes:
+            - ./scripts/postgres_db.sql:/docker-entrypoint-initdb.d/postgres_db.sql
             - pgdata:/var/lib/postgresql/data
 
     pg_admin:

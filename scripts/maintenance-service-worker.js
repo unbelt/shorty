@@ -9,7 +9,7 @@ async function fetchAndReplace(request) {
     modifiedHeaders.append('Pragma', 'no-cache');
 
     // Return maint page if you're not calling from a trusted IP
-    if (request.headers.get('cf-connecting-ip') !== '77.85.23.148') {
+    if (request.headers.get('cf-connecting-ip') !== '84.115.212.248') {
         // Return modified response
         return new Response(maintPage, {
             headers: modifiedHeaders,
@@ -57,7 +57,7 @@ const maintPage = `
 
   <article>
     <div class="content">
-      <h1>We&rsquo;ll be back soon!</h1>
+      <h1>We&rsquo;ll be back shortly!</h1>
       <p>We are performing maintenance. Please check back later...</p>
       <p>
         &mdash; <b><font color="red">{</font></b

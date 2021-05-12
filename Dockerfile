@@ -1,4 +1,7 @@
-FROM mcr.microsoft.com/dotnet/core/sdk:3.1-buster AS build
+#############
+# Build .NET
+#############
+FROM mcr.microsoft.com/dotnet/core/sdk:3.1-alpine AS build
 WORKDIR /Source
 EXPOSE 80
 CMD ASPNETCORE_URLS=http://*:$PORT dotnet Shorty.Web.dll
@@ -11,8 +14,10 @@ RUN dotnet restore
 COPY /Source/Shorty.Web .
 RUN dotnet publish -c Release -o out
 
+#####################################################
 # Copy all the rest & Client build as distinct layer
-FROM node:8-alpine
+#####################################################
+FROM node:16-alpine
 WORKDIR /app
 COPY package.json .
 RUN npm i --quiet
