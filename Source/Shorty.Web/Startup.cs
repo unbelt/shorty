@@ -64,7 +64,7 @@ namespace Shorty.Web
                 option.UseGeneralRoutePrefix(Constants.GENERAL_ROUTE_PREFIX);
             }).SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
 
-            // In production, the Angular files will be served from this directory
+            // In production, the client files will be served from this directory
             services.AddSpaStaticFiles(configuration => configuration.RootPath = _clientConfig.DistPath);
 
             (var container, var serviceProvider) = services.InitializeAutofac(GetType().Assembly);

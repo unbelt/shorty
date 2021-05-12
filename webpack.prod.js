@@ -75,16 +75,16 @@ module.exports = {
             chunks: 'async',
             minSize: 244000,
             maxSize: 344000,
-            minRemainingSize: 0,
             minChunks: 1,
-            maxAsyncRequests: 10,
-            maxInitialRequests: 10,
-            enforceSizeThreshold: 50000,
+            maxAsyncRequests: 5,
+            maxInitialRequests: 3,
+            automaticNameDelimiter: '~',
+            automaticNameMaxLength: 30,
+            name: true,
             cacheGroups: {
-                defaultVendors: {
+                vendors: {
                     test: /[\\/]node_modules[\\/]/,
                     priority: -10,
-                    reuseExistingChunk: true,
                 },
                 default: {
                     minChunks: 2,

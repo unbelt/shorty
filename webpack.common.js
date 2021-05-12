@@ -15,7 +15,7 @@ module.exports = {
     resolve: {
         extensions: ['.ts', '.js', '.jsx', '.json'],
         alias: rxPaths(),
-        fallback: { path: require.resolve('path-browserify') },
+        // fallback: { path: require.resolve('path-browserify') }, // Webpack 5
     },
     devServer: {
         historyApiFallback: true,
