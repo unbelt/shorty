@@ -3,7 +3,6 @@
 #############
 FROM mcr.microsoft.com/dotnet/core/sdk:3.1-alpine AS build
 WORKDIR /Source
-EXPOSE 80
 CMD ASPNETCORE_URLS=http://*:$PORT dotnet Shorty.Web.dll
 
 # Copy csproj and restore as distinct layer
