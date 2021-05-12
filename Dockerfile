@@ -19,7 +19,7 @@ RUN dotnet publish -c Release -o out
 FROM node:16-alpine
 WORKDIR /app
 COPY package.json .
-RUN npm i --quiet
+RUN npm i --quiet --force
 COPY . .
 CMD npm run build:prod
 
