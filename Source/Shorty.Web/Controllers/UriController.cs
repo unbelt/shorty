@@ -76,7 +76,7 @@ namespace Shorty.Web.Controllers
 
                 if (redirect)
                 {
-                    return Redirect(string.IsNullOrWhiteSpace(uri) ? "/not-found" : uri);
+                    return Redirect(string.IsNullOrWhiteSpace(uri) ? "/-/not-found" : uri);
                 }
 
                 return Ok(uri);

@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { LayoutComponent } from './layout/layout.component';
+import { LayoutComponent } from './_layout/layout.component';
 
 const routes: Routes = [
     {
@@ -14,11 +14,15 @@ const routes: Routes = [
             },
             {
                 path: 'uri',
-                loadChildren: () => import('./shorty/shorty.module').then((m) => m.ShortyModule),
+                loadChildren: () => import('./_shorty/shorty.module').then((m) => m.ShortyModule),
             },
+            // {
+            //     path: 'todo',
+            //     loadChildren: () => import('./_todo/todo.module').then((m) => m.TodoModule),
+            // },
             {
-                path: '**',
-                loadChildren: () => import('./pages/pages.module').then((m) => m.PagesModule),
+                path: '-',
+                loadChildren: () => import('./_pages/pages.module').then((m) => m.PagesModule),
             },
         ],
     },
