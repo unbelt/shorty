@@ -4,12 +4,12 @@ namespace Shorty.Web.Config
 {
     public interface IDatabaseConfiguration
     {
-        string PostgreSqlConnectionString { get; set; }
+        string PostgreSqlUrl { get; set; }
     }
 
     [ExcludeFromCodeCoverage]
     internal sealed class DatabaseConfiguration : IDatabaseConfiguration
     {
-        public string PostgreSqlConnectionString { get; set; }
+        public string PostgreSqlUrl { get; set; }
     }
 }
