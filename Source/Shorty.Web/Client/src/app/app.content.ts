@@ -9,7 +9,7 @@ export enum TextContent {
     NotFoundTitle = '404',
     NotFoundDescription = 'Not Found!',
     GoHome = 'Go to homepage',
-    AboutTitle = 'Tech Stacks',
+    AboutTitle = 'Tech Stack',
     AboutTechStack = 'This is an open-source application created with .NET Core / Angular + RxJS & Material UI for the ✨ style.',
     AboutBug = 'Found a 🕷️? Send a',
     Feedback = 'feedback',

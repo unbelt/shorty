@@ -6,20 +6,17 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { EffectsModule } from '@ngrx/effects';
 import { META_REDUCERS, StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-
 import { LayoutModule } from './_layout/layout.module';
-import { SHORTY_STATE_KEY } from './_shorty/store/shorty.state';
 import { ShortenEffects } from './_shorty/store/shorty.effects';
-
+import { SHORTY_STATE_KEY } from './_shorty/store/shorty.state';
+import { AppRoutingModule } from './app-routing.module';
+import { AppComponent } from './app.component';
+import { ROOT_SESSION_STORAGE_KEY, ROOT_STORAGE_KEYS } from './app.tokens';
+import { SessionStorageService } from './services/session-storage.service';
 import { rootReducerMap } from './store/reducers/root.reducer';
 import { getMetaReducers } from './store/reducers/storage-meta.reducer';
 import { APP_STATE_KEY } from './store/states/app.state';
 import { STORAGE_KEY } from './store/states/root.state';
-import { SessionStorageService } from './services/session-storage.service';
-
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { ROOT_SESSION_STORAGE_KEY, ROOT_STORAGE_KEYS } from './app.tokens';
 
 @NgModule({
     declarations: [AppComponent],

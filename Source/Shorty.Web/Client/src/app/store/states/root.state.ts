@@ -1,5 +1,5 @@
+import { IShortyState, initialShortyState } from '../../_shorty/store/shorty.state';
 import { IAppState, initialAppState } from './app.state';
-import { initialShortyState, IShortyState } from '../../_shorty/store/shorty.state';
 
 export const STORAGE_KEY = 'bcs_storage';
 

@@ -31,11 +31,7 @@ module.exports = {
         rules: [
             {
                 test: /\.ts$/,
-                use: [
-                    'awesome-typescript-loader',
-                    'angular2-template-loader',
-                    'source-map-loader',
-                ],
+                use: ['awesome-typescript-loader', 'angular2-template-loader', 'source-map-loader'],
             },
             {
                 test: /\.(png|jpg|gif|woff|woff2|ttf|svg|eot)$/,

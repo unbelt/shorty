@@ -1,6 +1,6 @@
 import { Action, createReducer, on } from '@ngrx/store';
 import * as action from './shorty.actions';
-import { initialShortyState, IShortyState } from './shorty.state';
+import { IShortyState, initialShortyState } from './shorty.state';
 
 const shortyReducer = createReducer<IShortyState>(
     initialShortyState,

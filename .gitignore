@@ -6,6 +6,7 @@ obj
 logs
 .vs
 .vscode
+!.vscode/settings.json
 *.user
 *.idea
 *.husky
