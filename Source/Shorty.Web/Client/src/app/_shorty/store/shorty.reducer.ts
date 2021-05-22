@@ -1,20 +1,24 @@
-import { Action, createReducer, on } from '@ngrx/store';
+import { Action, ActionReducerMap, createReducer, on } from '@ngrx/store';
 import * as action from './shorty.actions';
-import { IShortyState, initialShortyState } from './shorty.state';
+import { initialUriState, IShortyState, IUriState } from './shorty.state';
 
-const shortyReducer = createReducer<IShortyState>(
-    initialShortyState,
+const uriReducer = createReducer<IUriState>(
+    initialUriState,
     on(action.getShortUri, (state, { payload: { longUri, uriPrefix } }) => ({
         ...state,
-        longUri,
-        uriPrefix,
+        longValue: longUri,
+        prefix: uriPrefix,
     })),
     on(action.reciveUri, (state, { payload: { uri } }) => ({
         ...state,
-        uri,
+        shortValue: uri,
     }))
 );
 
-export function shorty(state: IShortyState, action: Action): IShortyState {
-    return shortyReducer(state, action);
+export function uriState(state: IUriState = initialUriState, action: Action): IUriState {
+    return uriReducer(state, action);
 }
+
+export const shortyReducerMap: ActionReducerMap<IShortyState> = {
+    uri: uriState,
+};

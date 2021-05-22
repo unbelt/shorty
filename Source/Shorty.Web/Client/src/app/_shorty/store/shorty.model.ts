@@ -6,7 +6,7 @@ import * as selectors from './shorty.selectors';
 
 @Injectable({ providedIn: 'root' })
 export class ShortyModel {
-    shortyState$ = this.store.select(selectors.shortyState);
+    shortyState$ = this.store.select(selectors.uriState);
     longUri$ = this.store.select(selectors.longUri);
     shortenUri$ = this.store.select(selectors.shortenUri);
     uriPrefix$ = this.store.select(selectors.uriPrefix);

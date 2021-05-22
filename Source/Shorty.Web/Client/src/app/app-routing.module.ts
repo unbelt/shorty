@@ -16,10 +16,10 @@ const routes: Routes = [
                 path: 'uri',
                 loadChildren: () => import('./_shorty/shorty.module').then((m) => m.ShortyModule),
             },
-            // {
-            //     path: 'todo',
-            //     loadChildren: () => import('./_todo/todo.module').then((m) => m.TodoModule),
-            // },
+            {
+                path: 'task',
+                loadChildren: () => import('./_task/task.module').then((m) => m.TaskModule),
+            },
             {
                 path: '-',
                 loadChildren: () => import('./_pages/pages.module').then((m) => m.PagesModule),

@@ -1,13 +1,25 @@
-export const SHORTY_STATE_KEY = 'shorty';
+export const SHORTY_STORE_NAME = 'shorty';
 
 export interface IShortyState {
-    uri: string;
-    longUri: string;
-    uriPrefix?: string;
+    uri: IUriState;
 }
 
 export const initialShortyState: IShortyState = {
-    uri: '',
-    longUri: '',
-    uriPrefix: '',
+    uri: {
+        longValue: '',
+        shortValue: '',
+        prefix: '',
+    },
+};
+
+export interface IUriState {
+    shortValue: string;
+    longValue: string;
+    prefix?: string;
+}
+
+export const initialUriState: IUriState = {
+    shortValue: '',
+    longValue: '',
+    prefix: '',
 };

@@ -1,7 +1,7 @@
 import { InjectionToken } from '@angular/core';
 
 // Token for the state keys
-export const ROOT_STORAGE_KEYS = new InjectionToken<string[]>('StoreKeys');
+export const ROOT_STATE_TOKEN = new InjectionToken<string[]>('RootState');
 
-// Token for the sessionStorage key
-export const ROOT_SESSION_STORAGE_KEY = new InjectionToken<string[]>('AppStorage');
+// Token for the sessionStorage keys
+export const ROOT_SESSION_STORAGE_TOKEN = new InjectionToken<string[]>('RootStorage');

@@ -1,4 +1,4 @@
-export const APP_STATE_KEY = 'app';
+export const APP_STORE_NAME = 'app';
 
 export interface ILoaderState {
     isLoading: boolean;
@@ -9,9 +9,9 @@ export const initialLoaderState: ILoaderState = {
 };
 
 export interface IAppState {
-    loaderState: ILoaderState;
+    loader: ILoaderState;
 }
 
 export const initialAppState: IAppState = {
-    loaderState: initialLoaderState,
+    loader: initialLoaderState,
 };

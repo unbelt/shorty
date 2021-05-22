@@ -1,0 +1,31 @@
+<mat-sidenav-container fxFlexFill>
+    <mat-sidenav fxLayout="column" mode="side" opened>
+        <app-task-nav></app-task-nav>
+    </mat-sidenav>
+    <mat-sidenav-content>
+        <mat-selection-list #trashSelectionList class="trash-list">
+            <mat-list-option class="trash-list-option" *ngFor="let task of tasks$ | async">
+                {{ task.title }}
+                <button mat-stroked-button class="trash-list-restore-button" (click)="restoreTask(task.id)">
+                    Restore
+                </button>
+            </mat-list-option>
+        </mat-selection-list>
+
+        <ng-container *ngIf="tasks$ | async as tasks">
+            <button
+                mat-raised-button
+                color="warn"
+                class="empty-task-trash-button"
+                *ngIf="tasks.length"
+                (click)="emptyTaskTrash()"
+            >
+                Empty trash
+            </button>
+
+            <div class="mat-elevation-z2 empty-task-trash-info-message" *ngIf="!tasks.length">
+                <h3>Yay! Your trash is empty 🗑️</h3>
+            </div>
+        </ng-container>
+    </mat-sidenav-content>
+</mat-sidenav-container>

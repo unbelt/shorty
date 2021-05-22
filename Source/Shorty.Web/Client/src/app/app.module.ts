@@ -1,5 +1,4 @@
 import { CommonModule, LocationStrategy, PathLocationStrategy } from '@angular/common';
-import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -7,47 +6,60 @@ import { EffectsModule } from '@ngrx/effects';
 import { META_REDUCERS, StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { LayoutModule } from './_layout/layout.module';
-import { ShortenEffects } from './_shorty/store/shorty.effects';
-import { SHORTY_STATE_KEY } from './_shorty/store/shorty.state';
+import { ShortyModule } from './_shorty/shorty.module';
+import { SHORTY_STORE_NAME } from './_shorty/store/shorty.state';
+import { TASK_STORE_NAME } from './_task/_store/task.state';
+import { TaskModule } from './_task/task.module';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { ROOT_SESSION_STORAGE_KEY, ROOT_STORAGE_KEYS } from './app.tokens';
+import { ROOT_SESSION_STORAGE_TOKEN, ROOT_STATE_TOKEN } from './app.tokens';
 import { SessionStorageService } from './services/session-storage.service';
-import { rootReducerMap } from './store/reducers/root.reducer';
+import { appReducerMap } from './store/reducers/app.reducer';
 import { getMetaReducers } from './store/reducers/storage-meta.reducer';
-import { APP_STATE_KEY } from './store/states/app.state';
-import { STORAGE_KEY } from './store/states/root.state';
+import { APP_STORE_NAME } from './store/states/app.state';
+import { ROOT_SESSION_STORAGE_KEY } from './store/states/root.state';
 
 @NgModule({
     declarations: [AppComponent],
     imports: [
+        // Angular
         CommonModule,
-        LayoutModule,
-        BrowserModule.withServerTransition({ appId: 'shorty' }),
         BrowserAnimationsModule,
-        HttpClientModule,
+        BrowserModule.withServerTransition({ appId: 'shorty' }),
+
+        // NGRX
+        StoreModule.forFeature(APP_STORE_NAME, appReducerMap),
+        StoreModule.forRoot(
+            {},
+            {
+                runtimeChecks: {
+                    strictStateImmutability: true,
+                    strictActionImmutability: true,
+                    strictStateSerializability: true,
+                    strictActionSerializability: true,
+                },
+            }
+        ),
+        EffectsModule.forRoot([]),
+        StoreDevtoolsModule.instrument({ maxAge: 25 }), // Save max 25 states
+
+        // Internal
         AppRoutingModule,
-        StoreModule.forRoot(rootReducerMap, {
-            runtimeChecks: {
-                strictStateImmutability: true,
-                strictActionImmutability: true,
-                strictStateSerializability: true,
-                strictActionSerializability: true,
-            },
-        }),
-        EffectsModule.forRoot([ShortenEffects]),
-        StoreDevtoolsModule.instrument({ maxAge: 25 }), // maxAge: save max 25 states
+        LayoutModule,
+        ShortyModule,
+        TaskModule,
     ],
     providers: [
         {
             provide: LocationStrategy,
             useClass: PathLocationStrategy,
         },
-        { provide: ROOT_STORAGE_KEYS, useValue: [APP_STATE_KEY, SHORTY_STATE_KEY] }, // Use to store values on store change
-        { provide: ROOT_SESSION_STORAGE_KEY, useValue: STORAGE_KEY },
+        // Use to store values on store change
+        { provide: ROOT_STATE_TOKEN, useValue: [APP_STORE_NAME, SHORTY_STORE_NAME, TASK_STORE_NAME] },
+        { provide: ROOT_SESSION_STORAGE_TOKEN, useValue: ROOT_SESSION_STORAGE_KEY, multi: true },
         {
             provide: META_REDUCERS,
-            deps: [ROOT_STORAGE_KEYS, ROOT_SESSION_STORAGE_KEY, SessionStorageService],
+            deps: [ROOT_STATE_TOKEN, ROOT_SESSION_STORAGE_TOKEN, SessionStorageService],
             useFactory: getMetaReducers,
             multi: true,
         },

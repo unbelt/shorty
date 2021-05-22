@@ -1,0 +1,21 @@
+.task,
+.task-title-field,
+.task-description-field,
+.add-task-button {
+    width: 30%;
+    margin: 10px auto;
+    display: block;
+}
+
+.delete-task-button {
+    float: right;
+}
+
+.completed {
+    opacity: 0.5;
+
+    .task-title,
+    .task-description {
+        text-decoration: line-through;
+    }
+}

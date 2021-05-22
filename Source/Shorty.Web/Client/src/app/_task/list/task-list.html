@@ -1,0 +1,49 @@
+<mat-sidenav-container>
+    <!-- Navigation -->
+    <mat-sidenav fxLayout="column" mode="side" opened>
+        <app-task-nav></app-task-nav>
+    </mat-sidenav>
+
+    <!-- Content -->
+    <mat-sidenav-content>
+        <ng-template #list let-tasks>
+            <form [formGroup]="taskFormGroup" (ngSubmit)="addTask()">
+                <mat-form-field class="task-title-field">
+                    <input matInput formControlName="title" placeholder="Task" />
+                    <mat-error *ngIf="taskFormGroup.invalid"> enter at least 2 characters </mat-error>
+                </mat-form-field>
+
+                <mat-form-field class="task-description-field">
+                    <textarea matInput formControlName="description" placeholder="Description"></textarea>
+                </mat-form-field>
+                <button
+                    class="add-task-button"
+                    type="submit"
+                    [disabled]="taskFormGroup.invalid"
+                    mat-raised-button
+                    color="primary"
+                >
+                    Add Task
+                </button>
+            </form>
+
+            <mat-card *ngFor="let task of tasks" class="task" [class.completed]="task.isCompleted">
+                <mat-card-title class="task-title">{{ task.title }}</mat-card-title>
+                <mat-card-subtitle class="task-description"> {{ task.description }} </mat-card-subtitle>
+                <mat-checkbox (click)="toggleTaskComplete(task.id)" [checked]="task.isCompleted"
+                    >Complete</mat-checkbox
+                >
+                <button (click)="deleteTask(task.id)" mat-button color="warn" class="delete-task-button">
+                    Delete
+                </button>
+            </mat-card>
+        </ng-template>
+
+        <!-- Loading indicator -->
+        <ng-template #loading>Loading...</ng-template>
+        <ng-container
+            *ngTemplateOutlet="(isLoaded$ | async) ? list : loading; context: { $implicit: tasks$ | async }"
+        >
+        </ng-container>
+    </mat-sidenav-content>
+</mat-sidenav-container>

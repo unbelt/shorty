@@ -2,17 +2,17 @@ import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { map, switchMap } from 'rxjs/operators';
 import { ShortyService } from '../shorty.service';
-import * as action from './shorty.actions';
+import { getShortUri, reciveUri } from './shorty.actions';
 
 @Injectable()
-export class ShortenEffects {
+export class ShortyEffects {
     shortUri$ = createEffect(() =>
         this.actions$.pipe(
-            ofType(action.getShortUri),
+            ofType(getShortUri),
             switchMap((state) => {
                 return this.shortyService.getShortUri(state.payload.longUri, state.payload.uriPrefix).pipe(
                     map((shortenUri: string) => {
-                        return action.reciveUri(shortenUri);
+                        return reciveUri(shortenUri);
                     })
                 );
             })

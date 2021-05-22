@@ -1,7 +1,7 @@
 import { createSelector } from '@ngrx/store';
 import { rootState } from '../../store/selectors/app.selectors';
 
-export const shortyState = createSelector(rootState, (state) => state.shorty);
-export const longUri = createSelector(shortyState, (state) => state.longUri);
-export const shortenUri = createSelector(shortyState, (state) => state.uri);
-export const uriPrefix = createSelector(shortyState, (state) => state.uriPrefix);
+export const uriState = createSelector(rootState, (state) => state.shorty.uri);
+export const longUri = createSelector(uriState, (uri) => uri.longValue);
+export const shortenUri = createSelector(uriState, (uri) => uri.shortValue);
+export const uriPrefix = createSelector(uriState, (uri) => uri.prefix);
