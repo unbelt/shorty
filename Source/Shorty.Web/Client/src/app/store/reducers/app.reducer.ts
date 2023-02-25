@@ -1,6 +1,8 @@
-import { Action, ActionReducerMap, createReducer, on } from '@ngrx/store';
+import type { Action, ActionReducerMap } from '@ngrx/store';
+import { createReducer, on } from '@ngrx/store';
 import * as actions from '../actions/app.actions';
-import { IAppState, ILoaderState, initialLoaderState } from '../states/app.state';
+import type { IAppState, ILoaderState } from '../states/app.state';
+import { initialLoaderState } from '../states/app.state';
 
 const reducer = createReducer<ILoaderState>(
     initialLoaderState,

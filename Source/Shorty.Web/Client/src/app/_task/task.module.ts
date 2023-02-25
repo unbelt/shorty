@@ -10,14 +10,14 @@ import { MatListModule } from '@angular/material/list';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
-import { TaskListComponent } from './list/task-list.component';
-import { TaskNavComponent } from './nav/task-nav.component';
-import { TaskRoutingModule } from './task-routing.module';
-import { TaskTrashComponent } from './trash/task-trash.components';
 import { TaskListEffects } from './_store/effects/task-list.effects';
 import { TaskTrashEffects } from './_store/effects/task-trash.effects';
 import { taskReducerMap } from './_store/reducers';
 import { TASK_STORE_NAME } from './_store/task.state';
+import { TaskListComponent } from './list/task-list.component';
+import { TaskNavComponent } from './nav/task-nav.component';
+import { TaskRoutingModule } from './task-routing.module';
+import { TaskTrashComponent } from './trash/task-trash.components';
 
 @NgModule({
     declarations: [TaskListComponent, TaskTrashComponent, TaskNavComponent],

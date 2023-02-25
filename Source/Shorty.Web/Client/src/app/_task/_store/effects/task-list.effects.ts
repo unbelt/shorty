@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
-import { Actions, createEffect, ofType } from '@ngrx/effects';
+import type { Actions } from '@ngrx/effects';
+import { createEffect, ofType } from '@ngrx/effects';
 import { catchError, map, switchMap } from 'rxjs/operators';
-import { ITask } from '../../task.models';
-import { TaskService } from '../../task.service';
+import type { ITask } from '../../task.models';
+import type { TaskService } from '../../task.service';
 import { loadTaskList, loadTaskListError, loadTaskListSuccess } from '../actions/task-list.actions';
 
 @Injectable()

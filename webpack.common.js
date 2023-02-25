@@ -1,4 +1,3 @@
-const rxPaths = require('rxjs/_esm5/path-mapping');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
@@ -14,8 +13,7 @@ module.exports = {
     },
     resolve: {
         extensions: ['.ts', '.js', '.jsx', '.json'],
-        alias: rxPaths(),
-        // fallback: { path: require.resolve('path-browserify') }, // Webpack 5
+        fallback: { path: require.resolve('path-browserify') },
     },
     devServer: {
         historyApiFallback: true,

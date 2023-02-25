@@ -11,3 +11,4 @@ logs
 *.idea
 *.husky
 package-lock.json
+yarn-error.log

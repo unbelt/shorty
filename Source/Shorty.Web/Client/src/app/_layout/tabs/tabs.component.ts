@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { INavigationLink } from '../../app.models';
+import type { INavigationLink } from '../../app.models';
 
 @Component({
     selector: 'app-tabs',

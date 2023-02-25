@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { Store } from '@ngrx/store';
+import type { Store } from '@ngrx/store';
 import * as action from '../actions/app.actions';
 import { appState } from '../selectors/app.selectors';
-import { IRootState } from '../states/root.state';
+import type { IRootState } from '../states/root.state';
 
 @Injectable({ providedIn: 'root' })
 export class AppModel {

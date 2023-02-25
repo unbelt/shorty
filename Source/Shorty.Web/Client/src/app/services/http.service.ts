@@ -1,12 +1,13 @@
-import { HttpClient } from '@angular/common/http';
+import type { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import type { Observable } from 'rxjs';
+import { of } from 'rxjs';
 import { catchError, finalize } from 'rxjs/operators';
+import type { TosaterService } from './toaster.service';
 // @ts-ignore
 import { app } from '../../../../../../app.config.js';
-import { IDictionary } from '../app.models';
-import { AppModel } from '../store/models/app.model';
-import { TosaterService } from './toaster.service';
+import type { IDictionary } from '../app.models';
+import type { AppModel } from '../store/models/app.model';
 
 @Injectable({ providedIn: 'root' })
 export class HttpService {

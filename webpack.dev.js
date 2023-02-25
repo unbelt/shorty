@@ -31,7 +31,7 @@ module.exports = {
         rules: [
             {
                 test: /\.ts$/,
-                use: ['awesome-typescript-loader', 'angular2-template-loader', 'source-map-loader'],
+                use: ['ts-loader', 'angular2-template-loader', 'source-map-loader'],
             },
             {
                 test: /\.(png|jpg|gif|woff|woff2|ttf|svg|eot)$/,
@@ -58,12 +58,12 @@ module.exports = {
         ],
     },
     plugins: [
-        function () {
-            this.plugin('watch-run', function (watching, callback) {
-                console.log('\x1b[33m%s\x1b[0m', `Begin compile at ${new Date().toTimeString()}`);
-                callback();
-            });
-        },
+        // function () {
+        //     this.plugin('watch-run', function (watching, callback) {
+        //         console.log('\x1b[33m%s\x1b[0m', `Begin compile at ${new Date().toTimeString()}`);
+        //         callback();
+        //     });
+        // },
         new webpack.optimize.ModuleConcatenationPlugin(),
 
         new ESLintPlugin({

@@ -1,6 +1,7 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
-import { ITaskState, TASK_STORE_NAME } from '../task.state';
 import { getActiveTasks, getInactiveTasks, getTaskListIsLoaded } from './task.selectors';
+import type { ITaskState } from '../task.state';
+import { TASK_STORE_NAME } from '../task.state';
 
 const getTaskModule = createFeatureSelector<ITaskState>(TASK_STORE_NAME);
 

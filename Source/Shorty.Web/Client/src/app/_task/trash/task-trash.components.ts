@@ -1,5 +1,6 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { TaskTrashModel } from '../_store/models/task-trash.model';
+import type { OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
+import type { TaskTrashModel } from '../_store/models/task-trash.model';
 
 @Component({
     templateUrl: 'task-trash.html',

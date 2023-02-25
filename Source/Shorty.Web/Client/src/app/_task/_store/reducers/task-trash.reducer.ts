@@ -1,7 +1,9 @@
-import { Action, createReducer, on } from '@ngrx/store';
-import { ITask } from '../../task.models';
+import type { Action } from '@ngrx/store';
+import { createReducer, on } from '@ngrx/store';
+import type { ITaskTrashState } from './../task.state';
+import { initialTaskTrashState } from './../task.state';
+import type { ITask } from '../../task.models';
 import { emptyTaskTrash, loadTaskTrashSuccess, restoreTask } from '../actions/task-trash.actions';
-import { initialTaskTrashState, ITaskTrashState } from './../task.state';
 
 export const taskTrashReducer = createReducer<ITaskTrashState>(
     initialTaskTrashState,

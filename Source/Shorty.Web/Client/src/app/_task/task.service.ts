@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs/internal/Observable';
+import type { Observable } from 'rxjs/internal/Observable';
 import { of } from 'rxjs/internal/observable/of';
 import { delay } from 'rxjs/operators';
-import { ITask } from './task.models';
+import type { ITask } from './task.models';
 
 @Injectable({ providedIn: 'root' })
 export class TaskService {

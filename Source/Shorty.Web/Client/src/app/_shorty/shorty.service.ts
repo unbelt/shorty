@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import { HttpService } from '../services/http.service';
+import type { Observable } from 'rxjs';
+import type { HttpService } from '../services/http.service';
 
 @Injectable({ providedIn: 'root' })
 export class ShortyService {

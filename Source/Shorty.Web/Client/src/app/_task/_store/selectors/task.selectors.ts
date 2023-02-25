@@ -1,5 +1,5 @@
-import { ITask } from '../../task.models';
-import { ITaskListState } from '../task.state';
+import type { ITask } from '../../task.models';
+import type { ITaskListState } from '../task.state';
 
 export const getActiveTasks = (state: ITaskListState) =>
     state.tasks.filter((task: ITask) => !task.isInTrash && !task.isDeleted);

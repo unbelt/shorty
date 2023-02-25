@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
-import { Actions, createEffect, ofType } from '@ngrx/effects';
+import type { Actions } from '@ngrx/effects';
+import { createEffect, ofType } from '@ngrx/effects';
 import { map, switchMap } from 'rxjs/operators';
-import { ShortyService } from '../shorty.service';
 import { getShortUri, reciveUri } from './shorty.actions';
+import type { ShortyService } from '../shorty.service';
 
 @Injectable()
 export class ShortyEffects {

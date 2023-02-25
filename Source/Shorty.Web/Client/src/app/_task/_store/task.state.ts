@@ -1,4 +1,4 @@
-import { ITask } from '../task.models';
+import type { ITask } from '../task.models';
 
 export const TASK_STORE_NAME = 'task';
 
@@ -12,7 +12,7 @@ export const initialTaskListState: ITaskListState = {
     isLoaded: false,
 };
 
-export interface ITaskTrashState extends ITaskListState {}
+export type ITaskTrashState = ITaskListState;
 
 export const initialTaskTrashState: ITaskTrashState = {
     tasks: [],

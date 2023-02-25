@@ -1,7 +1,8 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import type { OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { TaskListModel } from '../_store/models/task-list.model';
-import { ITask } from '../task.models';
+import type { TaskListModel } from '../_store/models/task-list.model';
+import type { ITask } from '../task.models';
 
 @Component({
     templateUrl: 'task-list.html',

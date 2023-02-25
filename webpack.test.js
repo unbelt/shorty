@@ -13,13 +13,14 @@ module.exports = {
 
     resolve: {
         extensions: ['.ts', '.js'],
+        fallback: { 'path': require.resolve('path-browserify') },
     },
 
     module: {
         rules: [
             {
                 test: /\.ts$/,
-                use: ['awesome-typescript-loader', 'angular2-template-loader', 'source-map-loader'],
+                use: ['ts-loader', 'angular2-template-loader', 'source-map-loader'],
             },
             {
                 test: /\.css$/,

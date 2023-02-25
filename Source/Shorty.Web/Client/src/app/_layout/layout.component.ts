@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { AppModel } from '../store/models/app.model';
+import type { AppModel } from '../store/models/app.model';
 
 @Component({
     selector: 'app-layout',

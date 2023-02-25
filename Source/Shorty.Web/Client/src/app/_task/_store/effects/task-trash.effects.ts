@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
-import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { Store } from '@ngrx/store';
+import type { Router } from '@angular/router';
+import type { Actions } from '@ngrx/effects';
+import { createEffect, ofType } from '@ngrx/effects';
+import type { Store } from '@ngrx/store';
 import { filter, map, switchMap } from 'rxjs/operators';
-import { ITask } from '../../task.models';
+import type { ITask } from '../../task.models';
 import { loadTaskTrash, loadTaskTrashSuccess } from '../actions/task-trash.actions';
 import { getInactiveTaskListState } from '../selectors';
-import { ITaskState } from '../task.state';
+import type { ITaskState } from '../task.state';
 
 @Injectable()
 export class TaskTrashEffects {

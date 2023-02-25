@@ -1,6 +1,6 @@
-import { Action, ActionReducer, MetaReducer } from '@ngrx/store';
+import type { Action, ActionReducer, MetaReducer } from '@ngrx/store';
 import { merge, pick } from 'lodash-es'; // TODO: Find alternative & remove lodash package
-import { SessionStorageService } from '../../services/session-storage.service';
+import type { SessionStorageService } from '../../services/session-storage.service';
 
 // Factory meta-reducer configuration function
 export function getMetaReducers(

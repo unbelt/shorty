@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { Store } from '@ngrx/store';
+import type { Store } from '@ngrx/store';
 import { emptyTaskTrash, loadTaskTrash, restoreTask } from '../actions/task-trash.actions';
 import { getInactiveTaskListState } from '../selectors';
-import { ITaskState } from '../task.state';
+import type { ITaskState } from '../task.state';
 
 @Injectable({ providedIn: 'root' })
 export class TaskTrashModel {

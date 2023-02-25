@@ -7,7 +7,7 @@ describe('SessionStorage service', () => {
     beforeEach(() => {
         TestBed.configureTestingModule({});
 
-        service = TestBed.get(SessionStorageService);
+        service = TestBed.inject(SessionStorageService);
     });
 
     it('should be defined', () => {

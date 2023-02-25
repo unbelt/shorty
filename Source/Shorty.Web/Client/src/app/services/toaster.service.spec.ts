@@ -1,5 +1,5 @@
 import { TestBed } from '@angular/core/testing';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { TosaterService } from './toaster.service';
 
 describe('Toaster service', () => {
@@ -8,10 +8,13 @@ describe('Toaster service', () => {
 
     beforeEach(() => {
         TestBed.configureTestingModule({
-            providers: [{ provide: MatSnackBar, useValue: snackBarMock }],
+            imports: [MatSnackBarModule],
+            providers: [TosaterService, { provide: MatSnackBar, useValue: snackBarMock }],
         });
 
-        service = TestBed.get(TosaterService);
+        TestBed.inject(MatSnackBar);
+
+        service = TestBed.inject(TosaterService);
     });
 
     it('should be defined', () => {

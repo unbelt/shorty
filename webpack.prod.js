@@ -78,11 +78,10 @@ module.exports = {
             minChunks: 1,
             maxAsyncRequests: 5,
             maxInitialRequests: 3,
+            enforceSizeThreshold: 50000,
             automaticNameDelimiter: '~',
-            automaticNameMaxLength: 30,
-            name: true,
             cacheGroups: {
-                vendors: {
+                defaultVendors: {
                     test: /[\\/]node_modules[\\/]/,
                     priority: -10,
                 },
@@ -98,9 +97,9 @@ module.exports = {
     plugins: [
         new webpack.NoEmitOnErrorsPlugin(),
 
-        new webpackTools.AngularCompilerPlugin({
-            tsConfigPath: `${app.dir.root}/tsconfig.aot.json`,
-            entryModule: `${app.dir.src}/app/app.module#AppModule`,
+        new webpackTools.AngularWebpackPlugin({
+            tsconfig: `${app.dir.root}/tsconfig.aot.json`,
+            // entryModule: `${app.dir.src}/app/app.module#AppModule`,
         }),
         new UglifyJSPlugin({
             parallel: 2,

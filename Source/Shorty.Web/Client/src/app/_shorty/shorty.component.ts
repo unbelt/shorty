@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
+import type { ShortyModel } from './store/shorty.model';
 import { TextContent } from '../app.content';
-import { TosaterService } from '../services/toaster.service';
-import { ShortyModel } from './store/shorty.model';
+import type { TosaterService } from '../services/toaster.service';
 
 @Component({
     templateUrl: 'shorty.html',
@@ -28,7 +28,9 @@ export class ShortyComponent {
             return;
         }
 
-        this.shortyModel.sendUri(this.uriForm.value, this.uriPrefixForm.value);
+        if (this.uriForm.value) {
+            this.shortyModel.sendUri(this.uriForm.value, this.uriPrefixForm.value || '');
+        }
     }
 
     copyToClipboard(value: string): void {

@@ -1,6 +1,6 @@
 import { createAction } from '@ngrx/store';
 import { actionType } from '../../../store/actions/action-type';
-import { ITask } from '../../task.models';
+import type { ITask } from '../../task.models';
 
 export enum TaskListAction {
     LOAD_TASK_LIST = '[TASK List] Load',

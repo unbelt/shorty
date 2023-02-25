@@ -1,5 +1,5 @@
 import { createSelector } from '@ngrx/store';
-import { IRootState } from '../states/root.state';
+import type { IRootState } from '../states/root.state';
 
 export const rootState = (state: IRootState) => state;
 

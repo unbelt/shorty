@@ -26,13 +26,14 @@ describe('Http service', () => {
         TestBed.configureTestingModule({
             imports: [MatSnackBarModule, HttpClientModule],
             providers: [
+                HttpService,
                 { provide: HttpClient, useValue: httpSpy },
                 { provide: AppModel, useValue: appModelSpy },
                 { provide: TosaterService, useValue: toasterSpy },
             ],
         });
 
-        service = TestBed.get(HttpService);
+        service = TestBed.inject(HttpService);
     });
 
     it('should be defined', () => {

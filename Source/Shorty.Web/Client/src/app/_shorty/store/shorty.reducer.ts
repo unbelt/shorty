@@ -1,6 +1,8 @@
-import { Action, ActionReducerMap, createReducer, on } from '@ngrx/store';
+import type { Action, ActionReducerMap } from '@ngrx/store';
+import { createReducer, on } from '@ngrx/store';
 import * as action from './shorty.actions';
-import { initialUriState, IShortyState, IUriState } from './shorty.state';
+import type { IShortyState, IUriState } from './shorty.state';
+import { initialUriState } from './shorty.state';
 
 const uriReducer = createReducer<IUriState>(
     initialUriState,

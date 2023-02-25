@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
-import { Store } from '@ngrx/store';
-import { ITask } from '../../task.models';
+import type { Store } from '@ngrx/store';
+import type { ITask } from '../../task.models';
 import { addTask, deleteTask, loadTaskList, toggleTaskComplete } from '../actions/task-list.actions';
 import { getActiveTaskListState, getTaskListIsLoadedState } from '../selectors';
-import { ITaskState } from '../task.state';
+import type { ITaskState } from '../task.state';
 
 @Injectable({ providedIn: 'root' })
 export class TaskListModel {

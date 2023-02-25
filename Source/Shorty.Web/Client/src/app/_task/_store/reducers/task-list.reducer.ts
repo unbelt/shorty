@@ -1,5 +1,6 @@
-import { Action, createReducer, on } from '@ngrx/store';
-import { ITask } from '../../task.models';
+import type { Action } from '@ngrx/store';
+import { createReducer, on } from '@ngrx/store';
+import type { ITask } from '../../task.models';
 import {
     addTask,
     deleteTask,
@@ -8,7 +9,8 @@ import {
     toggleTaskComplete,
 } from '../actions/task-list.actions';
 import { emptyTaskTrash, restoreTask } from '../actions/task-trash.actions';
-import { initialTaskListState, ITaskListState } from '../task.state';
+import type { ITaskListState } from '../task.state';
+import { initialTaskListState } from '../task.state';
 
 const taskListReducer = createReducer<ITaskListState>(
     initialTaskListState,
